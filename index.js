@@ -16,7 +16,7 @@ app.post('/api/opbot', (request,response)=>{
         agent.add('Test food random')
     }
     let intentMap = new Map();
-    interMap.set('Food Random',foodRandom)
+    intentMap.set('Food Random',foodRandom)
     agent.handleRequest(intentMap);
 })
 app.listen(port, function() {
