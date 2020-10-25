@@ -5,6 +5,7 @@ const app = express();
 const port =process.env.PORT || 3000
 const {foodRandom} = require('./controller/foodRandom')
 const {util} = require('./controller/util')
+const {fallback} = require('./controller/fallback')
 app.use(bodyParser.json())
 app.get('/', (req, res) => {
     res.send({
@@ -16,9 +17,7 @@ app.post('/api/opbot', (request,response)=>{
     let intentMap = new Map();
     intentMap.set('Food Random',foodRandom)
     intentMap.set('Function',util)
-    intentMap.set('Default Fallback Intent',(agent)=>{
-      agent.add('น้อนโอปอไม่เข้าใจ')
-    })
+    intentMap.set('Default Fallback Intent',fallback)
     agent.handleRequest(intentMap);
 })
 app.listen(port, function() {
