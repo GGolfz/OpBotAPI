@@ -20,10 +20,6 @@ exports.util = (agent)=>{
     }
     agent.add(''+response)
 }
-const randRange = (val1,val2) => {
-    let range = parseInt(val2) - parseInt(val1);
-    return (parseInt(Math.random() *10000000) % range) + parseInt(val1);
-}
 const random = (val) => {
     return parseInt(Math.random() *10000000) % parseInt(val) + 1
 }
