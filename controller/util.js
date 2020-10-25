@@ -1,18 +1,24 @@
 exports.util = (agent)=>{
+    let response = ''
     switch(agent.parameters.func){
         case "test":
-            agent.add('Test: '+agent.parameters.value)
+            response = 'Test: '+agent.parameters.value;
+            break;
         case "random":
             const value = agent.parameters.value;
             if(value.indexOf('-') != -1){
                 const v = value.split('-')
                 const res = randRange(v[0],v[1])
-                agent.add(res)
+                response = res
             } else {
                 const res = random(value)
-                agent.add(res)
+                response = res
             }
+            break;
+        default:
+            response = "อะหยังนะ"
     }
+    agent.add(response)
 }
 const randRange = (val1,val2) => {
     let range = parseInt(val2) - parseInt(val1);
