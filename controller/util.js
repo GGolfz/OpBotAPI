@@ -1,21 +1,16 @@
 exports.util = (agent)=>{
     let response = ''
-    console.log(agent.parameters)
     switch(agent.parameters.func){
         case "test":
-            response = 'Test: '+agent.parameters.value;
+            response = 'Test: Success';
             break;
         case "random":
             const value = agent.parameters.value;
-            console.log(value)
-            if(value.indexOf('-') != -1){
-                const v = value.split('-')
-                const res = randRange(v[0],v[1])
-                response = res
-            } else {
-                const res = random(value)
-                response = res
-            }
+            const res = random(value)
+            response = res
+            break;
+        case "talk":
+            response = agent.parameters.value;
             break;
         default:
             response = "อะหยังนะ"
