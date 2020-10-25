@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.post('/api/opbot',(req,res)=>{
+    console.log(req);
     const agent = new WebhookClient({ req, res });
     const foodRandom = (agent) => {
         agent.add('Test food random')
