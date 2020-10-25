@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const {WebhookClient} = require('dialogflow-fulfillment');
 const app = express();
 const port =process.env.PORT || 3000
-
+const {foodRandom} = require('./controller/foodRandom')
 app.use(bodyParser.json())
 app.get('/', (req, res) => {
     res.send({
@@ -12,9 +12,6 @@ app.get('/', (req, res) => {
   })
 app.post('/api/opbot', (request,response)=>{
     const agent = new WebhookClient({ request, response });
-    const foodRandom = (agent) => {
-        agent.add('Test food random')
-    }
     let intentMap = new Map();
     intentMap.set('Food Random',foodRandom)
     agent.handleRequest(intentMap);
