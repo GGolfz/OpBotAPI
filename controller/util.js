@@ -1,4 +1,4 @@
 exports.util = (agent)=>{
-    console.log(agent.client.body.queryResult)
-    agent.add(agent.client.body.queryResult)
+    console.log(agent.request_.client.body.queryResult)
+    agent.add(agent.request_.client.body.queryResult)
 }
