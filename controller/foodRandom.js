@@ -1,3 +1,62 @@
+const foodList = [{
+    name: 'หอหญิง',
+    restriction: ["กลางวัน","เย็น"]
+},
+{
+    name: 'KFC (ในมอ)',
+    restriction: ["กลางวัน"]
+},
+{
+    name: 'ลานไม้',
+    restriction: ["กลางวัน"]
+},
+{
+    name: 'เตี๋ยวเรือ',
+    restriction: ["กลางวัน"]
+},
+{
+    name: 'ลุงหนุ่ม',
+    restriction: []
+},
+{
+    name: 'KFC',
+    restriction: ["นาน"]
+},
+{
+    name: 'ข้าวมันไก่ 45',
+    restriction: ["กลางวัน","เย็น"]
+},
+{
+    name: 'มีข้าวมีเตี๋ยว',
+    restriction: ["กลางวัน"]
+},
+{
+    name: 'ลานปูน',
+    restriction: ["เย็น"]
+},
+{
+    name: 'Santa fe',
+    restriction: ["นาน"]
+}
+
+]
 exports.foodRandom = (agent) => {
-    agent.add('Test food random from controller')
+    const date = new Date().getDay();
+    const time = new Date().getHours();
+    let possible = []
+    for(let i of foodList){
+        if(time <= 14){
+            if(i.restriction.indexOf('กลางวัน') != -1 || i.restriction.length == 0){
+                possible.push(i)
+            } else if((date == 3 || date == 4) && i.restriction.indexOf('นาน') != -1){
+                possible.push(i)
+            }
+        } else {
+            if(i.restriction.indexOf('เย็น') != -1 || i.restriction.length == 0){
+                possible.push(i)
+            }
+        }
+    }
+    const ind = parseInt(Math.random() * 1000) % possible.length
+    agent.add(possible[ind].name)
 }
