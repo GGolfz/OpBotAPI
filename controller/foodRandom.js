@@ -41,8 +41,15 @@ const foodList = [{
 
 ]
 exports.foodRandom = (agent) => {
-    const date = new Date().getDay();
-    const time = new Date().getHours();
+    var date = new Date().getDay();
+    var time = new Date().getHours()
+    if(time + 7 >= 24){
+        time = time %24
+        date += 1;
+        if(date >= 7 ){
+            date = date %7;
+        }
+    }
     let possible = []
     for(let i of foodList){
         if(time <= 14){
@@ -58,5 +65,5 @@ exports.foodRandom = (agent) => {
         }
     }
     const ind = parseInt(Math.random() * 1000) % possible.length
-    agent.add(possible[ind].name+ ' '+time)
+    agent.add(possible[ind].name)
 }
