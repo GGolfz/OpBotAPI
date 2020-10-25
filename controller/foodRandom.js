@@ -53,14 +53,28 @@ exports.foodRandom = (agent) => {
     let possible = []
     for(let i of foodList){
         if(time <= 14){
-            if(i.restriction.indexOf('กลางวัน') != -1 || i.restriction.length == 0){
+            if(i.restriction.length == 0){
                 possible.push(i)
-            } else if((date == 3 || date == 4) && i.restriction.indexOf('นาน') != -1){
-                possible.push(i)
+            } else {
+                if(date == 3 || date == 4){
+                    if(i.restriction.indexOf('กลางวัน') != -1){
+                        possible.push(i)
+                    } else if(i.restriction.indexOf('นาน') != -1){
+                        possible.push(i)
+                    }
+                } else {
+                    if(i.restriction.indexOf('กลางวัน') != -1){
+                        possible.push(i)
+                    }
+                }
             }
         } else {
-            if(i.restriction.indexOf('เย็น') != -1 || i.restriction.length == 0){
+            if(i.restriction.length == 0){
                 possible.push(i)
+            } else {
+                if(i.restriction.indexOf('เย็น') != -1){
+                    possible.push(i)
+                }
             }
         }
     }
