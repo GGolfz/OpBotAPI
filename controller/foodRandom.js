@@ -58,5 +58,5 @@ exports.foodRandom = (agent) => {
         }
     }
     const ind = parseInt(Math.random() * 1000) % possible.length
-    agent.add(possible[ind].name)
+    agent.add(possible[ind].name+ ' '+time)
 }
