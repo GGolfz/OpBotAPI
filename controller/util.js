@@ -12,6 +12,9 @@ exports.util = (agent)=>{
         case "talk":
             response = agent.parameters.value;
             break;
+        case "space":
+            response = agent.parameters.value.split('').join(' ')
+            break;
         default:
             response = "อะหยังนะ"
     }
