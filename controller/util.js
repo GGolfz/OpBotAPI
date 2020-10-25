@@ -18,7 +18,7 @@ exports.util = (agent)=>{
         default:
             response = "อะหยังนะ"
     }
-    agent.add(response)
+    agent.add(''+response)
 }
 const randRange = (val1,val2) => {
     let range = parseInt(val2) - parseInt(val1);
