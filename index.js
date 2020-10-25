@@ -3,18 +3,20 @@ const bodyParser = require("body-parser");
 const {WebhookClient} = require('dialogflow-fulfillment');
 const app = express();
 const port =process.env.PORT || 3000
-app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.post('/api/opbot',(req,res)=>{
-    const agent = new WebhookClient({ req, res });
+app.use(bodyParser.json())
+app.get('/', (req, res) => {
+    res.send({
+      success: true
+    });
+  })
+app.post('/api/opbot', (request,response)=>{
+    const agent = new WebhookClient({ request, response });
     const foodRandom = (agent) => {
         agent.add('Test food random')
     }
     let intentMap = new Map();
-    interMap.set('Food Random',foodRandom)
+    intentMap.set('Food Random',foodRandom)
     agent.handleRequest(intentMap);
 })
 app.listen(port, function() {
