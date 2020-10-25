@@ -1,11 +1,13 @@
 exports.util = (agent)=>{
     let response = ''
+    console.log(agent.parameters)
     switch(agent.parameters.func){
         case "test":
             response = 'Test: '+agent.parameters.value;
             break;
         case "random":
             const value = agent.parameters.value;
+            console.log(value)
             if(value.indexOf('-') != -1){
                 const v = value.split('-')
                 const res = randRange(v[0],v[1])
