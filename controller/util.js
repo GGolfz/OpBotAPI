@@ -1,4 +1,4 @@
 exports.util = (agent)=>{
-    console.log(agent)
-    agent.add(JSON.stringify(agent))
+    console.log(agent.client.body.queryResult)
+    agent.add(agent.client.body.queryResult)
 }
