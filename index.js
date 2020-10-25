@@ -5,11 +5,15 @@ const app = express();
 const port =process.env.PORT || 3000
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.json())
+app.get('/', (req, res) => {
+    res.send({
+      success: true
+    });
+  })
 app.post('/api/opbot', (request,response)=>{
-    console.log(request.data);
+    console.log('POST: /');
+  console.log('Body: ',request.body);
     
     // const agent = new WebhookClient({ request, response });
     // const foodRandom = (agent) => {
