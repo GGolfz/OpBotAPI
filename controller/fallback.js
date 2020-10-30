@@ -1,5 +1,4 @@
 const admin = require('firebase-admin')
-const { service } = require('firebase-functions/lib/providers/analytics')
 var seviceAccountKey = {
   type: process.env.type,
   project_id: process.env.project_id,
