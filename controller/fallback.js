@@ -14,13 +14,18 @@ var database = admin.database()
 var dbRef = database.ref('/')
 const response = ["อะไรนะ ยัยตัวดี","พ้มไม่เข้าใจ","มันคือไรนะ"]
 exports.fallback = async (agent) => {
-    await dbRef.equalTo(agent.query).on('value',(snapshot)=>{
+    await dbRef.on('value',(snapshot)=>{
         let data =snapshot.val()
-        console.log(data)
-        agent.add(data[0].response)
+        data.map(el=>{
+            if(el.keyword == agent.query){
+                console.log(el)
+                agent.add(el.response)
+                return;
+            }
+        })
+        let answer = parseInt(Math.random() * 100) % 2;
+        if(answer == 0){
+            agent.add(response[parseInt(Math.random()*100)%response.length])
+        } 
     })
-    let answer = parseInt(Math.random() * 100) % 2;
-    if(answer == 0){
-        agent.add(response[parseInt(Math.random()*100)%response.length])
-    } 
 }
