@@ -25,6 +25,7 @@ exports.util = async (agent)=>{
             .database()
             .ref('/learning_'+Math.round(Math.random()*100000)).set({keyword,response})
             response = "อป รู้แล้วคั้บ"
+            break;
         default:
             response = "อะหยังนะ"
     }
