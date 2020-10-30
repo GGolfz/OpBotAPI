@@ -1,38 +1,36 @@
-const admin = require('firebase-admin'); 
-var firebaseConfig = {
-  apiKey: process.env.apiKey,
-  authDomain: process.env.authDomain,
+const admin = require('firebase-admin')
+var seviceAccountKey = {
+  type: process.env.type,
+  project_id: process.env.project_id,
+  private_key_id: process.env.private_key_id,
+  private_key: process.env.private_key,
+  client_email: process.env.client_email,
+  client_id: process.env.client_id,
+  auth_uri: process.env.auth_uri,
+  token_uri: process.env.token_uri,
+  auth_provider_x509_cert_url: process.env.auth_provider_x509_cert_url,
+  client_x509_cert_url:process.env.client_x509_cert_url
+}
+admin.initializeApp({
+  credential: admin.credential.cert(seviceAccountKey),
   databaseURL: process.env.databaseURL,
-  projectId: process.env.projectId,
-  storageBucket: process.env.storageBucket,
-  messagingSenderId: process.env.messagingSenderId,
-  appId: process.env.appId,
-  measurementId: process.env.measurementId
-};
-admin.initializeApp(firebaseConfig);
-var database = admin.database()
-var dbRef = database.ref('/')
-const response = ["อะไรนะ ยัยตัวดี","พ้มไม่เข้าใจ","มันคือไรนะ"]
+})
+const response = ['อะไรนะ ยัยตัวดี', 'พ้มไม่เข้าใจ', 'มันคือไรนะ']
 exports.fallback = async (agent) => {
-    try{
-    console.log(dbRef)
-    agent.add(response[(Math.random()*100)%response.length])
-    await dbRef.on('value',(snapshot)=>{
-        let data =snapshot.val()
-        console.log(data)
-        data.map(el=>{
-            if(el.keyword == agent.query){
-                console.log(el)
-                agent.add(el.response)
-                return;
-            }
-        })
-        let answer = parseInt(Math.random() * 100) % 2;
-        if(answer == 0){
-            agent.add(response[parseInt(Math.random()*100)%response.length])
-        } 
+  await admin
+    .database()
+    .ref('/')
+    .on('value', (snapshot) => {
+      let data = snapshot.val()
+      Object.keys(data).map((el) => {
+        if (data[el].keyword == agent.query) {
+          agent.add(data[el].response)
+          return
+        }
+      })
+      let answer = parseInt(Math.random() * 100) % 2
+      if (answer == 0) {
+        agent.add(response[parseInt(Math.random() * 100) % response.length])
+      }
     })
-    } catch(err){
-        console.log(err)
-    }
 }

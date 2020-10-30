@@ -5,7 +5,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const { foodRandom } = require('./controller/foodRandom')
 const { util } = require('./controller/util')
-const { fallback } = require('./controller/fallback')
+const { fallback,testFunc } = require('./controller/fallback')
 const { fatgirl } = require('./controller/sendImage')
 app.use(bodyParser.json())
 app.get('/', (req, res) => {
@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
     success: true,
   })
 })
+app.get('/test',testFunc)
 app.post('/api/opbot', (request, response) => {
   const agent = new WebhookClient({ request, response })
   let intentMap = new Map()
