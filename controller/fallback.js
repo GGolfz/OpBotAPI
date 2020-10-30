@@ -1,4 +1,5 @@
 const admin = require('firebase-admin')
+const { service } = require('firebase-functions/lib/providers/analytics')
 var seviceAccountKey = {
   type: process.env.type,
   project_id: process.env.project_id,
@@ -11,6 +12,7 @@ var seviceAccountKey = {
   auth_provider_x509_cert_url: process.env.auth_provider_x509_cert_url,
   client_x509_cert_url:process.env.client_x509_cert_url
 }
+console.log(JSON.stringify(seviceAccountKey))
 admin.initializeApp({
   credential: admin.credential.cert(seviceAccountKey),
   databaseURL: process.env.databaseURL,
