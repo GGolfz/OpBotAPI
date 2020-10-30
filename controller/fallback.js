@@ -9,7 +9,7 @@ var firebaseConfig = {
   appId: process.env.appId,
   measurementId: process.env.measurementId
 };
-admin.initializeApp({firebaseConfig});
+admin.initializeApp(firebaseConfig);
 var database = admin.database()
 var dbRef = database.ref('/')
 const response = ["อะไรนะ ยัยตัวดี","พ้มไม่เข้าใจ","มันคือไรนะ"]
