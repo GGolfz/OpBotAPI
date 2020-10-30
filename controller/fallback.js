@@ -15,6 +15,7 @@ var dbRef = database.ref('/')
 const response = ["อะไรนะ ยัยตัวดี","พ้มไม่เข้าใจ","มันคือไรนะ"]
 exports.fallback = async (agent) => {
     try{
+        console.log("TEST Fallback")
     await dbRef.on('value',(snapshot)=>{
         let data =snapshot.val()
         console.log(data)
