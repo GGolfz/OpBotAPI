@@ -10,7 +10,7 @@ var firebaseConfig = {
   measurementId: process.env.measurementId
 };
 admin.initializeApp({firebaseConfig});
-var database = firebase.database()
+var database = admin.database()
 var dbRef = database.ref('/')
 const response = ["อะไรนะ ยัยตัวดี","พ้มไม่เข้าใจ","มันคือไรนะ"]
 exports.fallback = async (agent) => {
