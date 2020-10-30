@@ -17,6 +17,7 @@ exports.fallback = async (agent) => {
     try{
     await dbRef.on('value',(snapshot)=>{
         let data =snapshot.val()
+        console.log(data)
         data.map(el=>{
             if(el.keyword == agent.query){
                 console.log(el)
