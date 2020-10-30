@@ -17,7 +17,7 @@ exports.util = (agent)=>{
             response = agent.parameters.value.split('').join(' ')
             break;
         case "train":
-            let temp =agent.parameters.value;
+            let temp = agent.parameters.value;
             temp = temp.split(':')
             keyword = temp[0];
             response = temp[1];
