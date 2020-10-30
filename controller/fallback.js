@@ -14,6 +14,7 @@ var database = admin.database()
 var dbRef = database.ref('/')
 const response = ["อะไรนะ ยัยตัวดี","พ้มไม่เข้าใจ","มันคือไรนะ"]
 exports.fallback = async (agent) => {
+    try{
     await dbRef.on('value',(snapshot)=>{
         let data =snapshot.val()
         data.map(el=>{
@@ -28,4 +29,7 @@ exports.fallback = async (agent) => {
             agent.add(response[parseInt(Math.random()*100)%response.length])
         } 
     })
+    } catch(err){
+        console.log(err)
+    }
 }
