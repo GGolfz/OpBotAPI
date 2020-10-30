@@ -1,4 +1,5 @@
-exports.util = (agent)=>{
+const {admin} = require('./db')
+exports.util = async (agent)=>{
     let response = ''
     switch(agent.parameters.func){
         case "test":
@@ -14,6 +15,16 @@ exports.util = (agent)=>{
             break;
         case "space":
             response = agent.parameters.value.split('').join(' ')
+            break;
+        case "train":
+            let temp = agent.parameters.value;
+            temp = temp.split(':')
+            keyword = temp[0];
+            response = temp[1];
+            await admin 
+            .database()
+            .ref('/learning_'+Math.round(Math.random()*100000)).set({keyword,response})
+            response = "อป รู้แล้วคั้บ"
             break;
         default:
             response = "อะหยังนะ"
