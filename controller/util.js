@@ -23,7 +23,7 @@ exports.util = async (agent)=>{
             response = temp[1];
             await admin 
             .database()
-            .ref('/learning_'+(Math.random()*100000)).set({keyword,response})
+            .ref('/learning_'+Math.round(Math.random()*100000)).set({keyword,response})
             response = "อป รู้แล้วคั้บ"
         default:
             response = "อะหยังนะ"
