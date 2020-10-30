@@ -14,6 +14,8 @@ var database = admin.database()
 var dbRef = database.ref('/')
 const response = ["อะไรนะ ยัยตัวดี","พ้มไม่เข้าใจ","มันคือไรนะ"]
 exports.fallback = async (agent) => {
+    console.log(agent)
+    console.log(Object.keys(agent))
     await dbRef.equalTo(agent.queryText).on('child_added',(snapshot)=>{
         let data =snapshot.val()
         console.log(data)
