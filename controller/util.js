@@ -1,5 +1,5 @@
 const {admin} = require('./db')
-exports.util = (agent)=>{
+exports.util = async (agent)=>{
     let response = ''
     switch(agent.parameters.func){
         case "test":
