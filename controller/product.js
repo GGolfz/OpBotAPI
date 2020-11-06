@@ -1,6 +1,8 @@
 const { Card, Text, Suggestion, Payload } = require('dialogflow-fulfillment')
 exports.product = async (agent) => {
+  // works
   agent.add('ต้องการรับสินค้าประเภทไหนคะ')
+  // no error but not send
   agent.add(
     new Payload('LINE', {
       type: 'template',
@@ -28,10 +30,12 @@ exports.product = async (agent) => {
           },
         ],
       },
-    }),
+    },
     { sendAsMessage: true }
-  )
+  ));
+  // works
   agent.add(new Text('Woah'))
+  // works but cannot change title
   agent.add(new Suggestion('Suggestion1'))
   agent.add(new Suggestion('Suggestion2'))
   agent.add(new Suggestion('Suggestion3'))
