@@ -2,7 +2,7 @@ const { Card, Text, Suggestion, Payload } = require('dialogflow-fulfillment')
 exports.product = async (agent) => {
   agent.add('ต้องการรับสินค้าประเภทไหนคะ')
   agent.add(
-    new Payload('line', {
+    new Payload('LINE', {
       type: 'template',
       altText: 'This is an image carousel template',
       template: {
