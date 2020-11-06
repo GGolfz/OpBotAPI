@@ -7,6 +7,7 @@ const { foodRandom } = require('./controller/foodRandom')
 const { util } = require('./controller/util')
 const { fallback } = require('./controller/fallback')
 const { fatgirl } = require('./controller/sendImage')
+const { product } = require('./controller/product')
 app.use(bodyParser.json())
 app.get('/', (req, res) => {
   res.send({
@@ -15,13 +16,12 @@ app.get('/', (req, res) => {
 })
 app.post('/api/opbot', (request, response) => {
   const agent = new WebhookClient({ request, response })
-  console.log(agent.contexts);
-  console.log(agent);
   let intentMap = new Map()
   intentMap.set('Food Random', foodRandom)
   intentMap.set('Function', util)
   intentMap.set('Default Fallback Intent', fallback)
   intentMap.set('Fat', fatgirl)
+  intentMap.set('Product',product)
   agent.handleRequest(intentMap)
 })
 app.listen(port, function () {
