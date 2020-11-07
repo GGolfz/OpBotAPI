@@ -98,9 +98,9 @@ exports.productSelectAmount = async (agent) => {
     const items = agent.context.get("items");
     console.log(items)
     if(items){
-    agent.context.set({name:'items',lifespan:5,parameters:{items:[...items.parameters.items,it]}})   
+    agent.context.set({name:'items',lifespan:1,parameters:{items:[...items.parameters.items,it]}})   
   } else {
-    agent.context.set({name:'items',lifespan:5,parameters:{items:[it]}})  
+    agent.context.set({name:'items',lifespan:1,parameters:{items:[it]}})  
 
   }
     console.log(it)
