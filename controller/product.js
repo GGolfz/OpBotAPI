@@ -151,7 +151,7 @@ exports.productEnd = async (agent) => {
         })
         agent.context.set({
           name: 'items',
-          lifespan: 0,
+          lifespan: 5,
           parameters: { items: temp },
         })
         agent.add(
