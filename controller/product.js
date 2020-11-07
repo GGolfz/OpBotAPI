@@ -133,18 +133,18 @@ exports.productEnd = async (agent) => {
       .ref(`/product`)
       .on('value', (snapshot) => {
         value = snapshot.val()
+        all.map(async (el) => {
+          agent.add(
+            'ProductID: ' +
+              el.productID +
+              ' Amount: ' +
+              el.amount +
+              ' Price: ' +
+              parseInt(el.amount) * parseInt(value[el.productID])
+          )
+        })
+        agent.context.set({ name: 'items', lifespan: 0, parameters: {} })
       })
-    all.map(async (el) => {
-      agent.add(
-        'ProductID: ' +
-          el.productID +
-          ' Amount: ' +
-          el.amount +
-          ' Price: ' +
-          parseInt(el.amount) * parseInt(value[el.productID])
-      )
-    })
-    agent.context.set({ name: 'items', lifespan: 0, parameters: {} })
   } catch (err) {
     console.log(err)
   }
