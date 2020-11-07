@@ -40,36 +40,36 @@ exports.product = async (agent) => {
     // works
     agent.add(new Text('Test Text'))
     // suggestion
-    // agent.add(
-    //   new Payload(
-    //     'LINE',
-    //     {
-    //       type: 'text',
-    //       text: 'ต้องการเลือกช่องทางจัดส่งแบบไหนคะ',
-    //       quickReply: {
-    //         items: [
-    //           {
-    //             type: 'action',
-    //             action: {
-    //               type: 'message',
-    //               label: 'ลงทะเบียน',
-    //               tect: 'ลงทะเบียน',
-    //             },
-    //           },
-    //           {
-    //             type: 'action',
-    //             action: {
-    //               type: 'message',
-    //               label: 'EMS',
-    //               tect: 'EMS',
-    //             },
-    //           },
-    //         ],
-    //       },
-    //     },
-    //     { sendAsMessage: true }
-    //   )
-    // )
+    agent.add(
+      new Payload(
+        'LINE',
+        {
+          type: 'text',
+          text: 'ต้องการเลือกช่องทางจัดส่งแบบไหนคะ',
+          quickReply: {
+            items: [
+              {
+                type: 'action',
+                action: {
+                  type: 'message',
+                  label: 'ลงทะเบียน',
+                  text: 'ลงทะเบียน',
+                },
+              },
+              {
+                type: 'action',
+                action: {
+                  type: 'message',
+                  label: 'EMS',
+                  text: 'EMS',
+                },
+              },
+            ],
+          },
+        },
+        { sendAsMessage: true }
+      )
+    )
   } catch (err) {
     console.log(err)
   }
