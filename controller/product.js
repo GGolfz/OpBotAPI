@@ -132,7 +132,7 @@ exports.productEnd = async (agent) => {
       .database()
       .ref(`/product`)
       .on('value', (snapshot) => {
-        value = snapshot.value()
+        value = snapshot.val()
       })
     all.map(async (el) => {
       agent.add(
