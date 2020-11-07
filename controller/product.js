@@ -127,13 +127,13 @@ exports.productEnd = async (agent) => {
     const all = items.parameters.items
     console.log(all)
     const temp = []
-    agent.add('รายการสินค้าทั้งหมด')
     var value
     await admin
       .database()
       .ref(`/product`)
       .on('value', (snapshot) => {
         value = snapshot.val()
+        agent.add('รายการสินค้าทั้งหมด')
         all.map(async (el) => {
           agent.add(
             'ProductID: ' +
@@ -198,7 +198,7 @@ exports.productFinish = async (agent) => {
     fee = 20
   }
   const temp = agent.context.get('items')
-  const items = temp.parameters
+  const items = temp.parameters.items
   const allprice = 0
   items.map((el) => {
     allprice += parseInt(el.price)
