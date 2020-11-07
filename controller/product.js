@@ -130,7 +130,7 @@ exports.productEnd = async (agent) => {
     console.log(all)
     agent.add('รายการสินค้าทั้งหมด')
     all.map((el) => {
-      agent.add('ProductID: ' + el.productID + 'Amount: ' + el.amount)
+      agent.add('ProductID: ' + el.productID + ' Amount: ' + el.amount)
     })
     agent.context.set({ name: 'items', lifespan: 0, parameters: {} })
   } catch (err) {
