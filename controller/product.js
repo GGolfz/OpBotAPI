@@ -2,6 +2,7 @@ const { Card, Text, Suggestion, Payload } = require('dialogflow-fulfillment')
 const { admin } = require('./db')
 exports.product = async (agent) => {
   try {
+    console.log(agent)
     // works
     agent.add('กรุณากรอกรหัสสินค้า')
     // works first when clicked it will repeat message second is link
