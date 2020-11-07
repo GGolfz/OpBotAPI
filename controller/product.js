@@ -95,11 +95,29 @@ exports.productSelectAmount = async (agent) => {
         }
       }
     })
-    agent.context.set({name:'items',lifespan:5,parameters:[it]})
+    agent.context.set({name:'items',lifespan:5,parameters:{items:[it]}})
     const items = agent.context.get("items");
     console.log(items)
     console.log(it)
+    agent.add("ต้องการสั่งสินค้าต่อหรือไม่")
   } catch (err) {
     console.log(err)
+  }
+}
+exports.productContinue = async (agent) => {
+  try {
+    const context = agent.contexts;
+    console.log("Product Continue");
+    console.log(context);
+    agent.add("กรุณากรอกรหัสสินค้า")
+  } catch (err) {
+    console.log(err);
+  }
+}
+exports.productEnd = async (agent) => {
+  try {
+    const context = agent.contexts;
+    console.log("Product End");
+    console.log(context);
   }
 }
