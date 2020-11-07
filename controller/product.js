@@ -85,11 +85,22 @@ exports.productSelectCode = async (agent) => {
 exports.productSelectAmount = async (agent) => {
   try {
     const context = agent.contexts;
+    let it;
     context.map(el=>{
-      console.log(el.name)
-      console.log(el.parameters);
+      if(el.name == 'productcode-followup'){
+        it= {
+          productID: el.parameters.ProductID,
+          amount: el.parameters.number 
+        }
+      }
     })
-    console.log(agent.parameters.number)
+    const items = agent.getContext("items");
+    if(items){
+      console.log(items.parameters);
+    } else {
+      agent.setContext({name:'item',lifespan:5,parameters:[it]})
+    }
+    console.log(it)
   } catch (err) {
     console.log(err)
   }
