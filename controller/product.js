@@ -127,7 +127,7 @@ exports.productEnd = async (agent) => {
     const all = items.parameters.items
     console.log(all)
     agent.add('รายการสินค้าทั้งหมด')
-    all.map((el) => {
+    all.map(async (el) => {
       await admin
         .database()
         .ref(`/product/${el.productID}`)
