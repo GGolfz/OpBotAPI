@@ -85,6 +85,7 @@ exports.productSelectCode = async (agent) => {
 exports.productSelectAmount = async (agent) => {
   try {
     const context = agent.contexts;
+    console.log(context)
     let it;
     context.map(el=>{
       if(el.name == 'productcode-followup'){
