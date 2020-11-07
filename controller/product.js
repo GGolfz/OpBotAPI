@@ -94,11 +94,11 @@ exports.productSelectAmount = async (agent) => {
         }
       }
     })
-    const items = agent.getContext("items");
+    const items = agent.context.get("items");
     if(items){
       console.log(items.parameters);
     } else {
-      agent.setContext({name:'item',lifespan:5,parameters:[it]})
+      agent.context.set({name:'items',lifespan:5,parameters:[it]})
     }
     console.log(it)
   } catch (err) {
