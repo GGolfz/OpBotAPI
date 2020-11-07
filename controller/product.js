@@ -84,7 +84,12 @@ exports.productSelectCode = async (agent) => {
 }
 exports.productSelectAmount = async (agent) => {
   try {
-    console.log(agent)
+    const context = agent.contexts;
+    context.map(el=>{
+      console.log(el.name)
+      console.log(el.parameters);
+    })
+    console.log(agent.parameters.number)
   } catch (err) {
     console.log(err)
   }
