@@ -127,14 +127,22 @@ exports.productEnd = async (agent) => {
     const all = items.parameters.items
     console.log(all)
     agent.add('รายการสินค้าทั้งหมด')
+    var value
     await admin
       .database()
       .ref(`/product`)
       .on('value', (snapshot) => {
-        console.log(snapshot.val())
+        value = snapshot.value()
       })
     all.map(async (el) => {
-      agent.add('ProductID: ' + el.productID + ' Amount: ' + el.amount)
+      agent.add(
+        'ProductID: ' +
+          el.productID +
+          ' Amount: ' +
+          el.amount +
+          ' Price: ' +
+          parseInt(el.amount) * parseInt(value[el.productID])
+      )
     })
     agent.context.set({ name: 'items', lifespan: 0, parameters: {} })
   } catch (err) {
