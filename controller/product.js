@@ -84,47 +84,55 @@ exports.productSelectCode = async (agent) => {
 }
 exports.productSelectAmount = async (agent) => {
   try {
-    const context = agent.contexts;
+    const context = agent.contexts
     console.log(context)
-    let it;
-    context.map(el=>{
-      if(el.name == 'productcode-followup'){
-        it= {
+    let it
+    context.map((el) => {
+      if (el.name == 'productcode-followup') {
+        it = {
           productID: el.parameters.ProductID,
-          amount: el.parameters.number 
+          amount: el.parameters.number,
         }
       }
     })
-    const items = agent.context.get("items");
+    const items = agent.context.get('items')
     console.log(items)
-    if(items){
-    agent.context.set({name:'items',lifespan:2,parameters:{items:[...items.parameters.items,it]}})   
-  } else {
-    agent.context.set({name:'items',lifespan:2,parameters:{items:[it]}})  
-
-  }
+    if (items) {
+      agent.context.set({
+        name: 'items',
+        lifespan: 5,
+        parameters: { items: [...items.parameters.items, it] },
+      })
+    } else {
+      agent.context.set({
+        name: 'items',
+        lifespan: 5,
+        parameters: { items: [it] },
+      })
+    }
     console.log(it)
-    agent.add("ต้องการสั่งสินค้าต่อหรือไม่")
+    agent.add('ต้องการสั่งสินค้าต่อหรือไม่')
   } catch (err) {
     console.log(err)
   }
 }
 exports.productContinue = async (agent) => {
   try {
-    agent.add("กรุณากรอกรหัสสินค้า")
+    agent.add('กรุณากรอกรหัสสินค้า')
   } catch (err) {
-    console.log(err);
+    console.log(err)
   }
 }
 exports.productEnd = async (agent) => {
   try {
-    const items = agent.context.get("items");
-    const all = items.parameters.items;
-    console.log(all);
-    agent.add("รายการสินค้าทั้งหมด")
-    all.map(el => {
-      agent.add("ProductID: "+ el.productID + "Amount: "+ el.amount);
+    const items = agent.context.get('items')
+    const all = items.parameters.items
+    console.log(all)
+    agent.add('รายการสินค้าทั้งหมด')
+    all.map((el) => {
+      agent.add('ProductID: ' + el.productID + 'Amount: ' + el.amount)
     })
+    agent.context.set({ name: 'items', lifespan: 0, parameters: {} })
   } catch (err) {
     console.log(err)
   }
