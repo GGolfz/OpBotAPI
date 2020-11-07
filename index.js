@@ -7,7 +7,7 @@ const { foodRandom } = require('./controller/foodRandom')
 const { util } = require('./controller/util')
 const { fallback } = require('./controller/fallback')
 const { fatgirl } = require('./controller/sendImage')
-const { product, productSelectCode, productSelectAmount, productContinue, productEnd } = require('./controller/product')
+const { product, productSelectCode, productSelectAmount, productContinue, productEnd, productFinish } = require('./controller/product')
 app.use(bodyParser.json())
 app.get('/', (req, res) => {
   res.send({
@@ -26,6 +26,7 @@ app.post('/api/opbot', (request, response) => {
   intentMap.set('ProductAmount',productSelectAmount)
   intentMap.set('ProductYes',productContinue)
   intentMap.set('ProductNo',productEnd)
+  intentMap.set('ProductEnd', productFinish)
   agent.handleRequest(intentMap)
 })
 app.listen(port, function () {

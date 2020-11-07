@@ -126,6 +126,7 @@ exports.productEnd = async (agent) => {
     const items = agent.context.get('items')
     const all = items.parameters.items
     console.log(all)
+    const temp = []
     agent.add('รายการสินค้าทั้งหมด')
     var value
     await admin
@@ -142,10 +143,72 @@ exports.productEnd = async (agent) => {
               ' Price: ' +
               parseInt(el.amount) * parseInt(value[el.productID])
           )
+          temp.push({
+            productID: el.productID,
+            amount: el.amount,
+            price: parseInt(el.amount) * parseInt(value[el.productID]),
+          })
         })
-        agent.context.set({ name: 'items', lifespan: 0, parameters: {} })
+        agent.context.set({
+          name: 'items',
+          lifespan: 0,
+          parameters: { items: temp },
+        })
+        agent.add(
+          new Payload(
+            'LINE',
+            {
+              type: 'text',
+              text: 'ต้องการเลือกช่องทางจัดส่งแบบไหนคะ',
+              quickReply: {
+                items: [
+                  {
+                    type: 'action',
+                    action: {
+                      type: 'message',
+                      label: 'ลงทะเบียน',
+                      text: 'ลงทะเบียน',
+                    },
+                  },
+                  {
+                    type: 'action',
+                    action: {
+                      type: 'message',
+                      label: 'EMS',
+                      text: 'EMS',
+                    },
+                  },
+                ],
+              },
+            },
+            { sendAsMessage: true }
+          )
+        )
       })
   } catch (err) {
     console.log(err)
   }
+}
+
+exports.productFinish = async (agent) => {
+  let fee = 0
+  if (agent.query == 'EMS') {
+    fee = 50
+  } else if (agent.query == 'ลงทะเบียน') {
+    fee = 20
+  }
+  const temp = agent.context.get('items')
+  const items = temp.parameters
+  const allprice = 0
+  items.map((el) => {
+    allprice += parseInt(el.price)
+  })
+  agent.add('ราคาสินค้า: ' + allprice)
+  agent.add('ค่าจัดส่ง: ' + fee)
+  agent.add('รวมทั้งสิ้น: ' + (allprice + fee))
+  agent.context.set({
+    name: 'items',
+    lifespan: 0,
+    parameters: {},
+  })
 }
