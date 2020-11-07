@@ -95,9 +95,9 @@ exports.productSelectAmount = async (agent) => {
         }
       }
     })
-    agent.context.set({name:'items',lifespan:5,parameters:{items:[it]}})
     const items = agent.context.get("items");
     console.log(items)
+    agent.context.set({name:'items',lifespan:5,parameters:{items:[...items.parameters.items,it]}})
     console.log(it)
     agent.add("ต้องการสั่งสินค้าต่อหรือไม่")
   } catch (err) {
@@ -106,9 +106,9 @@ exports.productSelectAmount = async (agent) => {
 }
 exports.productContinue = async (agent) => {
   try {
-    const context = agent.contexts;
+    const items = agent.context.get("items");
     console.log("Product Continue");
-    console.log(context);
+    console.log(items.parameters.items);
     agent.add("กรุณากรอกรหัสสินค้า")
   } catch (err) {
     console.log(err);
@@ -116,9 +116,9 @@ exports.productContinue = async (agent) => {
 }
 exports.productEnd = async (agent) => {
   try {
-    const context = agent.contexts;
+    const items = agent.context.get("items");
     console.log("Product End");
-    console.log(context);
+    console.log(items.parameters.items);
   } catch (err) {
     console.log(err)
   }
