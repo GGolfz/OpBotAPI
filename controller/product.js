@@ -199,7 +199,7 @@ exports.productFinish = async (agent) => {
   }
   const temp = agent.context.get('items')
   const items = temp.parameters.items
-  const allprice = 0
+  let allprice = 0
   items.map((el) => {
     allprice += parseInt(el.price)
   })
