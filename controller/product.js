@@ -106,9 +106,6 @@ exports.productSelectAmount = async (agent) => {
 }
 exports.productContinue = async (agent) => {
   try {
-    const items = agent.context.get("items");
-    console.log("Product Continue");
-    console.log(items.parameters.items);
     agent.add("กรุณากรอกรหัสสินค้า")
   } catch (err) {
     console.log(err);
@@ -117,8 +114,13 @@ exports.productContinue = async (agent) => {
 exports.productEnd = async (agent) => {
   try {
     const items = agent.context.get("items");
-    console.log("Product End");
-    console.log(items.parameters.items);
+    const all = items.parameters.items;
+    console.log(all);
+    agent.add("รายการสินค้าทั้งหมด")
+    all.map(el => {
+      agent.add("ProductID: "+ el.productID);
+      agent.add("Amount: "+ el.amount);
+    })
   } catch (err) {
     console.log(err)
   }
