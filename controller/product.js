@@ -1,5 +1,5 @@
 const { Card, Text, Suggestion, Payload } = require('dialogflow-fulfillment')
-const {admin} = require('./db')
+const { admin } = require('./db')
 exports.product = async (agent) => {
   try {
     // works
@@ -127,13 +127,14 @@ exports.productEnd = async (agent) => {
     const all = items.parameters.items
     console.log(all)
     agent.add('รายการสินค้าทั้งหมด')
-    all.map(async (el) => {
-      await admin
-        .database()
-        .ref(`/product/${el.productID}`)
-        .on('value',(snapshot)=>{
-          agent.add('ProductID: ' + el.productID + ' Amount: ' + el.amount + ' Price: '+ snapshot)
+    await admin
+      .database()
+      .ref(`/product`)
+      .on('value', (snapshot) => {
+        console.log(snapshot)
       })
+    all.map(async (el) => {
+      agent.add('ProductID: ' + el.productID + ' Amount: ' + el.amount)
     })
     agent.context.set({ name: 'items', lifespan: 0, parameters: {} })
   } catch (err) {
