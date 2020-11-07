@@ -119,5 +119,7 @@ exports.productEnd = async (agent) => {
     const context = agent.contexts;
     console.log("Product End");
     console.log(context);
+  } catch (err) {
+    console.log(err)
   }
 }
