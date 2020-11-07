@@ -97,7 +97,12 @@ exports.productSelectAmount = async (agent) => {
     })
     const items = agent.context.get("items");
     console.log(items)
-    agent.context.set({name:'items',lifespan:5,parameters:{items:[...items.parameters.items,it]}})
+    if(items){
+    agent.context.set({name:'items',lifespan:5,parameters:{items:[...items.parameters.items,it]}})   
+  } else {
+    agent.context.set({name:'items',lifespan:5,parameters:{items:[it]}})  
+
+  }
     console.log(it)
     agent.add("ต้องการสั่งสินค้าต่อหรือไม่")
   } catch (err) {
@@ -118,8 +123,7 @@ exports.productEnd = async (agent) => {
     console.log(all);
     agent.add("รายการสินค้าทั้งหมด")
     all.map(el => {
-      agent.add("ProductID: "+ el.productID);
-      agent.add("Amount: "+ el.amount);
+      agent.add("ProductID: "+ el.productID + "Amount: "+ el.amount);
     })
   } catch (err) {
     console.log(err)
