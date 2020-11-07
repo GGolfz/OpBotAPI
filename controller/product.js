@@ -36,7 +36,8 @@ exports.product = async (agent) => {
   // works
   agent.add(new Text('Test Text'))
   // suggestion
-  agent.add(new Payload('LINE',{type:'text',text:'ต้องการเลือกช่องทางจัดส่งแบบไหนคะ',quickReploy:{
+  agent.add(new Payload('LINE',
+  {type:'text',text:'ต้องการเลือกช่องทางจัดส่งแบบไหนคะ',quickReply:{
     items:[
       {
         type: "action",
