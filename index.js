@@ -7,7 +7,7 @@ const { foodRandom } = require('./controller/foodRandom')
 const { util } = require('./controller/util')
 const { fallback } = require('./controller/fallback')
 const { fatgirl } = require('./controller/sendImage')
-const { product } = require('./controller/product')
+const { product, productSelectCode, productSelectAmount } = require('./controller/product')
 app.use(bodyParser.json())
 app.get('/', (req, res) => {
   res.send({
@@ -22,6 +22,8 @@ app.post('/api/opbot', (request, response) => {
   intentMap.set('Default Fallback Intent', fallback)
   intentMap.set('Fat', fatgirl)
   intentMap.set('Product',product)
+  intentMap.set('ProductCode',productSelectCode)
+  intentMap.set('ProductAmount',productSelectAmount)
   agent.handleRequest(intentMap)
 })
 app.listen(port, function () {

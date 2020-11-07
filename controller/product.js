@@ -2,7 +2,7 @@ const { Card, Text, Suggestion, Payload } = require('dialogflow-fulfillment')
 exports.product = async (agent) => {
   try {
     // works
-    agent.add('ต้องการรับสินค้าประเภทไหนคะ')
+    agent.add('กรุณากรอกรหัสสินค้า')
     // works first when clicked it will repeat message second is link
     // agent.add(
     //   new Payload(
@@ -38,38 +38,53 @@ exports.product = async (agent) => {
     //   )
     // )
     // works
-    agent.add(new Text('Test Text'))
+    // agent.add(new Text('Test Text'))
     // suggestion
-    agent.add(
-      new Payload(
-        'LINE',
-        {
-          type: 'text',
-          text: 'ต้องการเลือกช่องทางจัดส่งแบบไหนคะ',
-          quickReply: {
-            items: [
-              {
-                type: 'action',
-                action: {
-                  type: 'message',
-                  label: 'ลงทะเบียน',
-                  text: 'ลงทะเบียน',
-                },
-              },
-              {
-                type: 'action',
-                action: {
-                  type: 'message',
-                  label: 'EMS',
-                  text: 'EMS',
-                },
-              },
-            ],
-          },
-        },
-        { sendAsMessage: true }
-      )
-    )
+    // agent.add(
+    //   new Payload(
+    //     'LINE',
+    //     {
+    //       type: 'text',
+    //       text: 'ต้องการเลือกช่องทางจัดส่งแบบไหนคะ',
+    //       quickReply: {
+    //         items: [
+    //           {
+    //             type: 'action',
+    //             action: {
+    //               type: 'message',
+    //               label: 'ลงทะเบียน',
+    //               text: 'ลงทะเบียน',
+    //             },
+    //           },
+    //           {
+    //             type: 'action',
+    //             action: {
+    //               type: 'message',
+    //               label: 'EMS',
+    //               text: 'EMS',
+    //             },
+    //           },
+    //         ],
+    //       },
+    //     },
+    //     { sendAsMessage: true }
+    //   )
+    // )
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+exports.productSelectCode = async (agent) => {
+  try {
+    agent.add('กรุณาระบุจำนวนที่ต้องการ')
+  } catch (err) {
+    console.log(err)
+  }
+}
+exports.productSelectAmount = async (agent) => {
+  try {
+    console.log(agent)
   } catch (err) {
     console.log(err)
   }
