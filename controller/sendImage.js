@@ -6,6 +6,10 @@ exports.fatgirl = (agent) => {
 }
 exports.timeTable = (agent) => {
     let year = agent.parameters.year
-    let fastTrack = agent.parameters.fastTrack
-    agent.add(new Image('https://ggolfz.codes/opbot/image/'+'y'+year+(fastTrack?'ft':'')+'.png'))
+    agent.add(new Image('https://ggolfz.codes/opbot/image/'+'y'+year+'.png'))
+
+    if(year == 1 || year == 2){
+        agent.add(new Image('https://ggolfz.codes/opbot/image/'+'y'+year+'ft'+'.png'))
+
+    }
 }
