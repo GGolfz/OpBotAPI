@@ -4,3 +4,8 @@ exports.fatgirl = (agent) => {
     console.log('https://ggolfz.codes/opbot/image/'+imgList[parseInt(Math.random()*100)%imgList.length])
     agent.add(new Image('https://ggolfz.codes/opbot/image/'+imgList[parseInt(Math.random()*100)%imgList.length]))
 }
+exports.timeTable = (agent) => {
+    let year = agent.parameters.year
+    let fastTrack = agent.parameters.fastTrack
+    agent.add(new Image('https://ggolfz.codes/opbot/image/'+'y'+year+(fastTrack?'ft':'')+'.png'))
+}

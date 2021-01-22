@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000
 const { foodRandom } = require('./controller/foodRandom')
 const { util } = require('./controller/util')
 const { fallback } = require('./controller/fallback')
-const { fatgirl } = require('./controller/sendImage')
+const { fatgirl, timeTable } = require('./controller/sendImage')
 app.use(bodyParser.json())
 app.get('/', (req, res) => {
   res.send({
@@ -20,6 +20,7 @@ app.post('/api/opbot', (request, response) => {
   intentMap.set('Function', util)
   intentMap.set('Default Fallback Intent', fallback)
   intentMap.set('Fat', fatgirl)
+  intentMap.set('Timetable', timeTable)
   agent.handleRequest(intentMap)
 })
 app.listen(port, function () {
