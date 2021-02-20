@@ -37,7 +37,9 @@ exports.util = async (agent)=>{
             } 
             axios.post('https://aka.cscms.me/api/newUrl',{url,prefer}).then(res=>{
                 console.log(res)
-                response = res.data;
+                response = 'อะเอาไป: https://aka.cscms.me/' + res.data.shortUrl;
+            }).catch(res=>{
+                response = 'ไม่ได้น้า เสียใจด้วย อุก้าก'
             })
             break;
         default:
