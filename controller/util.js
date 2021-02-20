@@ -35,7 +35,7 @@ exports.util = async (agent)=>{
             if(tempParam.length > 1){
                 prefer = tempParam[1];
             } 
-            axios.post('https://aka.cscms.me/api/newUrl',{url,prefer}).then(res=>{
+            await axios.post('https://aka.cscms.me/api/newUrl',{url,prefer}).then(res=>{
                 console.log(res)
                 response = 'อะเอาไป: https://aka.cscms.me/' + res.data.shortUrl;
             }).catch(res=>{
