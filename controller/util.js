@@ -28,12 +28,12 @@ exports.util = async (agent)=>{
             response = "อป รู้แล้วคั้บ"
             break;
         case "url":
-            let temp = agent.parameters.value;
-            temp = temp.split('!!!')
-            let url = temp[0];
+            let tempParam = agent.parameters.value;
+            tempParam = tempParam.split('!!!')
+            let url = tempParam[0];
             let prefer = null;
-            if(temp.length > 1){
-                prefer = temp[1];
+            if(tempParam.length > 1){
+                prefer = tempParam[1];
             } 
             axios.post('https://aka.cscms.me/api/newUrl',{url,prefer}).then(res=>{
                 console.log(res)
