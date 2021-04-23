@@ -1,6 +1,6 @@
 const {admin} = require('./db')
 const axios = require('axios')
-exports.util = async (agent)=>{
+exports.util = async (agent,cb)=>{
     let response = ''
     switch(agent.parameters.func){
         case "test":
@@ -42,6 +42,9 @@ exports.util = async (agent)=>{
                 response = 'ไม่ได้น้า เสียใจด้วย อุก้าก'
             })
             break;
+        case "mode":
+            cb();
+            response = "เปลี่ยนโหมดแร้ว"
         default:
             response = "อะหยังนะ"
     }

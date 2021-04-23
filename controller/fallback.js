@@ -1,7 +1,10 @@
 const {admin} = require('./db')
 const response = ['อะไรนะ ยัยตัวดี', 'พ้มไม่เข้าใจ', 'มันคือไรนะ']
-exports.fallback = async (agent) => {
-    let answer = parseInt(Math.random() * 100) % 2
+exports.fallback = async (agent,custom) => {
+    if(custom) {
+        agent.add(agent.query);
+    }
+    let answer = parseInt(Math.random() * 100) % 3
     await admin
         .database()
         .ref('/')
@@ -11,7 +14,7 @@ exports.fallback = async (agent) => {
         for(let el of keys) {
             if (data[el].keyword == agent.query) {
             agent.add(data[el].response)
-            answer =999
+            answer=999
             break;
             }
         }
