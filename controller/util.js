@@ -2,6 +2,7 @@ const {admin} = require('./db')
 const axios = require('axios')
 exports.util = async (agent,cb)=>{
     let response = ''
+    console.log(agent.parameters.func)
     switch(agent.parameters.func){
         case "test":
             response = 'Test: Success';
