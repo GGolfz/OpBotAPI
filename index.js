@@ -19,6 +19,7 @@ app.post('/api/opbot', (request, response) => {
   let intentMap = new Map()
   intentMap.set('Food Random', foodRandom)
   intentMap.set('Function', (agent) => util(agent,() => {
+    console.log(custom);
     custom = !custom;
   }))
   intentMap.set('Default Fallback Intent', (agent) => fallback(agent,custom))
