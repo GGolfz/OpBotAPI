@@ -3,7 +3,7 @@ const response = ['อะไรนะ ยัยตัวดี', 'พ้มไ�
 exports.fallback = async (agent,custom) => {
     if(custom) {
         agent.add(agent.query);
-        break;
+        return;
     }
     let answer = parseInt(Math.random() * 100) % 3
     await admin
