@@ -44,8 +44,8 @@ exports.util = async (agent,cb)=>{
             })
             break;
         case "mode":
-            cb();
             response = "เปลี่ยนโหมดแร้ว"
+            cb();
             break;
         default:
             response = "อะหยังนะ"

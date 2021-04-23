@@ -2,8 +2,8 @@ const {admin} = require('./db')
 const response = ['อะไรนะ ยัยตัวดี', 'พ้มไม่เข้าใจ', 'มันคือไรนะ']
 exports.fallback = async (agent,custom) => {
     if(custom) {
-        console.log("PRINT FROM CUSTOM")
         agent.add(agent.query);
+        break;
     }
     let answer = parseInt(Math.random() * 100) % 3
     await admin
