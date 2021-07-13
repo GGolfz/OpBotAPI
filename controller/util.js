@@ -25,8 +25,10 @@ exports.util = async (agent,cb)=>{
             response = temp[1];
             await admin.database().ref('/').orderByChildName("keyword").equalTo(keyword).on('val',s=> {
                 response= "อปรู้แล้วอะเตง ไม่เรียนซ้ำหรอกแบร่"
-                break;
             })
+            if(response!='') {
+                break
+            }
             await admin 
             .database()
             .ref('/learning_'+Math.round(Math.random()*100000)).set({keyword,response})
