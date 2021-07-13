@@ -13,7 +13,7 @@ exports.fallback = async (agent,custom) => {
         let data = snapshot.val()
         const keys = Object.keys(data)
         for(let el of keys) {
-            if (data[el].keyword == agent.query) {
+            if (data[el].keyword == agent.query || data[el].keyword.indexOf(agent.query) != -1) {
             agent.add(data[el].response)
             answer=999
             break;
