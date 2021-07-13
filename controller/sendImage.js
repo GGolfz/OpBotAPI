@@ -30,7 +30,7 @@ exports.timeTable = (agent) => {
       new Image("https://ggolfz.codes/opbot/image/" + "y" + year + ".png")
     );
 
-    if (year == 1 || year == 2) {
+    if (year == 2 || year == 3) {
       agent.add(
         new Image(
           "https://ggolfz.codes/opbot/image/" + "y" + year + "ft" + ".png"

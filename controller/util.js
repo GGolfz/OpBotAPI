@@ -1,7 +1,8 @@
 const {admin} = require('./db')
 const axios = require('axios')
-exports.util = async (agent)=>{
+exports.util = async (agent,cb)=>{
     let response = ''
+    console.log(agent.parameters.func)
     switch(agent.parameters.func){
         case "test":
             response = 'Test: Success';
@@ -22,6 +23,12 @@ exports.util = async (agent)=>{
             temp = temp.split(':')
             keyword = temp[0];
             response = temp[1];
+            await admin.database().ref('/').orderByChild("keyword").equalTo(keyword).on('value',s=> {
+                response= "อปรู้แล้วอะเตง ไม่เรียนซ้ำหรอกแบร่"
+            })
+            if(response!='') {
+                break
+            }
             await admin 
             .database()
             .ref('/learning_'+Math.round(Math.random()*100000)).set({keyword,response})
@@ -41,6 +48,10 @@ exports.util = async (agent)=>{
             }).catch(res=>{
                 response = 'ไม่ได้น้า เสียใจด้วย อุก้าก'
             })
+            break;
+        case "mode":
+            response = "เปลี่ยนโหมดแร้ว"
+            cb();
             break;
         default:
             response = "อะหยังนะ"
