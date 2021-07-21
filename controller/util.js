@@ -7,6 +7,19 @@ exports.util = async (agent, cb) => {
     case "test":
       response = "Test: Success";
       break;
+    case "broadcast":
+      response = "ประกาศแล้วจ้า";
+      axios.post(
+        "https://api.line.me/v2/bot/message/broadcast",
+        { messages: [{ type: "text", text: agent.parameters.value }] },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.channel_access_token}`,
+          },
+        }
+      );
+      break;
     case "random":
       const value = agent.parameters.value;
       const res = random(value);
