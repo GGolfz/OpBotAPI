@@ -6,6 +6,7 @@ exports.fallback = async (agent,custom) => {
         return;
     }
     let answer = parseInt(Math.random() * 100) % 3
+    console.log(agent.query, answer)
     await admin
         .database()
         .ref('/')
