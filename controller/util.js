@@ -26,13 +26,13 @@ exports.util = async (agent, cb) => {
       response = res;
       break;
     case "tellop":
-      const value = agent.parameters.value;
+      let message = agent.parameters.value;
       response = "เดี๋ยวบอกอปให้น้าเตง"
       axios.post(
         "https://api.line.me/v2/bot/message/push",
         {
           to: process.env.line_user_id,
-          messages: [{ type: "text", text: value }],
+          messages: [{ type: "text", text: message }],
         },
         {
           headers: {
