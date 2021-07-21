@@ -25,6 +25,23 @@ exports.util = async (agent, cb) => {
       const res = random(value);
       response = res;
       break;
+    case "tellop":
+      const value = agent.parameters.value;
+      response = "เดี๋ยวบอกอปให้น้าเตง"
+      axios.post(
+        "https://api.line.me/v2/bot/message/push",
+        {
+          to: process.env.line_user_id,
+          messages: [{ type: "text", text: value }],
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.channel_access_token}`,
+          },
+        }
+      );
+      break;
     case "talk":
       response = agent.parameters.value;
       break;
