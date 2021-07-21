@@ -19,6 +19,7 @@ exports.fallback = async (agent, custom) => {
             data[el].keyword == agent.query ||
             data[el].keyword.indexOf(agent.query) != -1
           ) {
+              console.log(data[el].response);
             agent.add(data[el].response);
             answer = 999;
             break;

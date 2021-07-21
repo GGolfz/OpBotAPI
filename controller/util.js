@@ -23,9 +23,7 @@ exports.util = async (agent, cb) => {
       temp = temp.split(":");
       keyword = temp[0];
       resp = temp[1];
-      let dbRef = admin
-      .database()
-      .ref("/");
+      let dbRef = admin.database().ref("/");
       await dbRef
         .orderByChild("keyword")
         .equalTo(keyword)
@@ -38,7 +36,7 @@ exports.util = async (agent, cb) => {
       await admin
         .database()
         .ref("/learning_" + Math.round(Math.random() * 100000))
-        .set({ keyword, resp });
+        .set({ keyword, response: resp });
       response = "อป รู้แล้วคั้บ";
       break;
     case "url":
