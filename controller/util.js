@@ -23,9 +23,10 @@ exports.util = async (agent, cb) => {
       temp = temp.split(":");
       keyword = temp[0];
       resp = temp[1];
-      await admin
-        .database()
-        .ref("/")
+      let dbRef = admin
+      .database()
+      .ref("/");
+      await dbRef
         .orderByChild("keyword")
         .equalTo(keyword)
         .on("value", (s) => {
