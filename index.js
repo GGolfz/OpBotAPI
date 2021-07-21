@@ -17,9 +17,7 @@ app.get('/', (req, res) => {
 app.post('/api/opbot', (request, response) => {
   const agent = new WebhookClient({ request, response })
   let intentMap = new Map()
-  console.log(agent);
-  console.log(agent.originalRequest.payload.data);
-  // console.log(agent.request.body.originalDetectIntentRequest);
+  console.log(agent.originalRequest.payload.data.source.userId);
   intentMap.set('Food Random', foodRandom)
   intentMap.set('Function', (agent) => util(agent,() => {
     console.log(custom);
