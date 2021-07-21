@@ -7,7 +7,7 @@ exports.util = async (agent, cb) => {
     case "test":
       response = "Test: Success";
       break;
-    case "broadcast":
+    case "opcast":
       response = "ประกาศแล้วจ้า";
       axios.post(
         "https://api.line.me/v2/bot/message/broadcast",
