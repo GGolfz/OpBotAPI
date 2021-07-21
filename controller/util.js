@@ -22,7 +22,7 @@ exports.util = async (agent, cb) => {
       let temp = agent.parameters.value;
       temp = temp.split(":");
       keyword = temp[0];
-      response = temp[1];
+      resp = temp[1];
       await admin
         .database()
         .ref("/")
@@ -37,7 +37,7 @@ exports.util = async (agent, cb) => {
       await admin
         .database()
         .ref("/learning_" + Math.round(Math.random() * 100000))
-        .set({ keyword, response });
+        .set({ keyword, resp });
       response = "อป รู้แล้วคั้บ";
       break;
     case "url":
