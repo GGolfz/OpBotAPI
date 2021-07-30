@@ -5,24 +5,25 @@ exports.morning = async (req, res) => {
   await admin
     .database()
     .ref("/subscriber")
-    .on("value", async (snapshot) => {
+    .once("value", async (snapshot) => {
       let data = await snapshot.val();
       for (let i in data) {
         subscriber.push(i);
       }
-    });
-    await axios.post(
-      "https://api.line.me/v2/bot/message/multicast",
-      {
-        to: subscriber,
-        messages: [{ type: "text", text: 'Good Morning ค้าบเทอ' }],
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.channel_access_token}`,
+      await axios.post(
+        "https://api.line.me/v2/bot/message/multicast",
+        {
+          to: subscriber,
+          messages: [{ type: "text", text: 'Good Morning ค้าบเทอ' }],
         },
-      }
-    ).catch(err=> console.log(err));
-    res.send({ success: true });
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.channel_access_token}`,
+          },
+        }
+      ).catch(err=> console.log(err));
+      res.send({ success: true });
+    });
+    
 };

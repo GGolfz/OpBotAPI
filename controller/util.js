@@ -58,7 +58,7 @@ exports.util = async (agent, cb) => {
       await dbRef
         .orderByChild("keyword")
         .equalTo(keyword)
-        .on("value", (s) => {
+        .once("value", (s) => {
           if (s.length > 0) response = "อปรู้แล้วอะเตง ไม่เรียนซ้ำหรอกแบร่";
         });
       if (response != "") {
