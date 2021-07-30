@@ -2,6 +2,7 @@ const { admin } = require("./db");
 const axios = require("axios");
 exports.util = async (agent, cb) => {
   let response = "";
+  let userId;
   console.log(agent.parameters.func);
   switch (agent.parameters.func) {
     case "test":
@@ -92,12 +93,12 @@ exports.util = async (agent, cb) => {
       cb();
       break;
     case "submor":
-      let userId = agent.originalRequest.payload.data.source.userId
+      userId = agent.originalRequest.payload.data.source.userId
       await admin.database().ref('/subscriber/'+ userId).remove();
       response = 'ขอบคุณที่ติดตามจ้า';
       break;
     case "unsub":
-      let userId = agent.originalRequest.payload.data.source.userId
+      userId = agent.originalRequest.payload.data.source.userId
       await admin.database().ref('/subscriber/'+ userId).set(userId);
       response = 'ไว้พบกันใหม่นะเทอ';
       break;
