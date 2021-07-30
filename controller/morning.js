@@ -12,7 +12,7 @@ exports.morning = async (req, res) => {
       }
       console.log(subscriber);
       await axios.post(
-        "https://api.line.me/v2/bot/message/push",
+        "https://api.line.me/v2/bot/message/multicast",
         {
           to: subscriber,
           messages: [{ type: "text", text: 'Good Morning ค้าบเทอ' }],
