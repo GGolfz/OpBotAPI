@@ -5,7 +5,7 @@ exports.morning = async (req, res) => {
     .database()
     .ref("/subscriber")
     .on("value", (snapshot) => {
-      for (let i of snapshot.val()) {
+      for (let i in snapshot.val()) {
         subscriber.push(i);
       }
     });
@@ -14,7 +14,7 @@ exports.morning = async (req, res) => {
     "https://api.line.me/v2/bot/message/push",
     {
       to: subscriber,
-      messages: [{ type: "text", text: message }],
+      messages: [{ type: "text", text: 'Good Morning ค้าบเทอ' }],
     },
     {
       headers: {
