@@ -1,11 +1,8 @@
 const { admin } = require("./db");
 exports.morning = async (req, res) => {
   const subscriber = [];
-  await admin.database().ref("/subscriber").get().then(snapshot => {
-      console.log(snapshot);
-        snapshot.forEach(doc => {
-            subscriber.push(doc.value);
-        })
+  await admin.database().ref("/subscriber").on('value',snapshot => {
+      console.log(snapshot.val())
   });
 
   axios.post(
