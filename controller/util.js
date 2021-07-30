@@ -91,6 +91,14 @@ exports.util = async (agent, cb) => {
       response = "เปลี่ยนโหมดแร้ว";
       cb();
       break;
+    case "submor":
+      let userId = agent.originalRequest.payload.data.source.userId
+      await admin.database().ref('/subscriber/'+ userId).remove();
+      break;
+    case "unsub":
+      let userId = agent.originalRequest.payload.data.source.userId
+      await admin.database().ref('/subscriber/'+ userId).set(userId);
+      break;
     default:
       response = "อะหยังนะ";
   }

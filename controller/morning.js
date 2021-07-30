@@ -10,7 +10,6 @@ exports.morning = async (req, res) => {
       for (let i in data) {
         subscriber.push(i);
       }
-      console.log(subscriber);
       await axios.post(
         "https://api.line.me/v2/bot/message/multicast",
         {
