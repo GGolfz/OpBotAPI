@@ -94,12 +94,12 @@ exports.util = async (agent, cb) => {
       break;
     case "submor":
       userId = agent.originalRequest.payload.data.source.userId
-      await admin.database().ref('/subscriber/'+ userId).remove();
+      await admin.database().ref('/subscriber/'+ userId).set(userId);
       response = 'ขอบคุณที่ติดตามจ้า';
       break;
     case "unsub":
       userId = agent.originalRequest.payload.data.source.userId
-      await admin.database().ref('/subscriber/'+ userId).set(userId);
+      await admin.database().ref('/subscriber/'+ userId).remove();
       response = 'ไว้พบกันใหม่นะเทอ';
       break;
     default:
