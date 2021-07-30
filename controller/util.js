@@ -2,6 +2,7 @@ const { admin } = require("./db");
 const axios = require("axios");
 exports.util = async (agent, cb) => {
   let response = "";
+  let userId;
   console.log(agent.parameters.func);
   switch (agent.parameters.func) {
     case "test":
@@ -90,6 +91,16 @@ exports.util = async (agent, cb) => {
     case "mode":
       response = "เปลี่ยนโหมดแร้ว";
       cb();
+      break;
+    case "submor":
+      userId = agent.originalRequest.payload.data.source.userId
+      await admin.database().ref('/subscriber/'+ userId).set(userId);
+      response = 'ขอบคุณที่ติดตามจ้า';
+      break;
+    case "unsub":
+      userId = agent.originalRequest.payload.data.source.userId
+      await admin.database().ref('/subscriber/'+ userId).remove();
+      response = 'ไว้พบกันใหม่นะเทอ';
       break;
     default:
       response = "อะหยังนะ";

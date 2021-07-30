@@ -15,9 +15,9 @@ exports.fallback = async (agent, custom) => {
         let data = snapshot.val();
         const keys = Object.keys(data);
         for (let el of keys) {
-          if (
+          if (data[el].keyword && (
             data[el].keyword == agent.query ||
-            data[el].keyword.indexOf(agent.query) != -1
+            data[el].keyword.indexOf(agent.query) != -1)
           ) {
               console.log(data[el].response);
             agent.add(data[el].response);
