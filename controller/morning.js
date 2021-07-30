@@ -5,8 +5,8 @@ exports.morning = async (req, res) => {
   await admin
     .database()
     .ref("/subscriber")
-    .on("value", (snapshot) => {
-      let data = snapshot.val();
+    .on("value", async (snapshot) => {
+      let data = await snapshot.val();
       for (let i in data) {
         subscriber.push(i);
       }
