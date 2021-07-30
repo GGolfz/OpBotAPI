@@ -1,9 +1,14 @@
 const { admin } = require("./db");
 exports.morning = async (req, res) => {
   const subscriber = [];
-  await admin.database().ref("/subscriber").on('value',snapshot => {
-      console.log(snapshot.val())
-  });
+  await admin
+    .database()
+    .ref("/subscriber")
+    .on("value", (snapshot) => {
+      for (let i of snapshot.val()) {
+        subscriber.push(i);
+      }
+    });
 
   axios.post(
     "https://api.line.me/v2/bot/message/push",
@@ -18,4 +23,5 @@ exports.morning = async (req, res) => {
       },
     }
   );
+  res.send({ success: true });
 };
