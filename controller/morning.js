@@ -14,7 +14,7 @@ exports.morning = async (req, res) => {
         "https://api.line.me/v2/bot/message/multicast",
         {
           to: subscriber,
-          messages: [{ type: "text", text: 'Good Morning ค้าบเทอ' }],
+          messages: [{ type: "text", text: 'จู้ดมอนิ่งคับ🐈❕' }],
         },
         {
           headers: {
