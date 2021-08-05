@@ -103,8 +103,8 @@ exports.util = async (agent, cb) => {
       response = 'ไว้พบกันใหม่นะเทอ';
       break;
     case "ask":
-      let message = agent.parameters.value;
-      response = "https://google.com/search?q="+message
+      let quest = agent.parameters.value;
+      response = "https://google.com/search?q="+quest
       break;
     default:
       response = "อะหยังนะ";
