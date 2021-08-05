@@ -102,6 +102,10 @@ exports.util = async (agent, cb) => {
       await admin.database().ref('/subscriber/'+ userId).remove();
       response = 'ไว้พบกันใหม่นะเทอ';
       break;
+    case "ask":
+      let message = agent.parameters.value;
+      response = "https://google.com/search?q="+message
+      break;
     default:
       response = "อะหยังนะ";
   }
