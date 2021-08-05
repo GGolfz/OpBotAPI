@@ -104,6 +104,7 @@ exports.util = async (agent, cb) => {
       break;
     case "ask":
       let quest = agent.parameters.value;
+      quest = encodeURIComponent(quest);
       response = "https://google.com/search?q="+quest
       break;
     default:
