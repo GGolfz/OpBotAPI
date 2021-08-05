@@ -7,7 +7,7 @@ const { foodRandom } = require("./controller/foodRandom");
 const { util } = require("./controller/util");
 const { fallback } = require("./controller/fallback");
 const { fatgirl, timeTable } = require("./controller/sendImage");
-const { morning } = require("./controller/morning");
+const { morning, lunch, night } = require("./controller/morning");
 let custom = false;
 app.use(bodyParser.json());
 app.get("/", (req, res) => {
@@ -16,6 +16,8 @@ app.get("/", (req, res) => {
   });
 });
 app.post("/api/morning", morning);
+app.post("/api/lunch", lunch);
+app.post("/api/night", night);
 app.post("/api/opbot", (request, response) => {
   try {
     const agent = new WebhookClient({ request, response });
