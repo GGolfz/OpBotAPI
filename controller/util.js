@@ -1,5 +1,6 @@
 const { admin } = require("./db");
 const axios = require("axios");
+const fs = require('fs');
 exports.util = async (agent, cb) => {
   let response = "";
   let userId;
@@ -7,6 +8,12 @@ exports.util = async (agent, cb) => {
   switch (agent.parameters.func) {
     case "test":
       response = "Test: Success";
+      break;
+    case "help":
+      let help = await fs.readFileSync("../README.md", "utf8");
+      help = help.replace(/\`/g, "");
+      help = help.replace(/\#/g, "");
+      response = help;
       break;
     case "opcast":
       response = "ประกาศแล้วจ้า";
