@@ -1,83 +1,55 @@
-const foodList = [{
-    name: 'หอหญิง',
-    restriction: ["กลางวัน","เย็น"]
-},
-{
-    name: 'KFC (ในมอ)',
-    restriction: ["กลางวัน"]
-},
-{
-    name: 'ลานไม้',
-    restriction: ["กลางวัน"]
-},
-{
-    name: 'เตี๋ยวเรือ',
-    restriction: ["กลางวัน"]
-},
-{
-    name: 'ลุงหนุ่ม',
-    restriction: []
-},
-{
-    name: 'KFC',
-    restriction: ["นาน"]
-},
-{
-    name: 'ข้าวมันไก่ 45',
-    restriction: ["กลางวัน","เย็น"]
-},
-{
-    name: 'มีข้าวมีเตี๋ยว',
-    restriction: ["กลางวัน"]
-},
-{
-    name: 'ลานปูน',
-    restriction: ["เย็น"]
-},
-{
-    name: 'Santa fe',
-    restriction: ["นาน"]
-}
-
-]
+const foodList = [
+  { name: "กะเพรา", type: "prefix" },
+  { name: "ผัดพริกแกง", type: "suffix" },
+  { name: "ผัดผงกะหรี่", type: "suffix" },
+  { name: "ทอดกระเทียม", type: "suffix" },
+  { name: "ผัดขี้เมา", type: "prefix" },
+  { name: "ผัดน้ำมันหอย", type: "suffix" },
+  { name: "ผัดพริกเผา", type: "suffix" },
+  { name: "ผัดไข่เค็ม", type: "suffix" },
+  { name: "ผัดไท", type: "prefix" },
+  { name: "ข้าวผัด", type: "prefix" },
+  { name: "ผัดผักบุ้งไฟแดง", type: "prefix" },
+  { name: "ไข่เจียว", type: "prefix" },
+  { name: "แกงจืด", type: "prefix" },
+  { name: "ไข่ลาวา", type: "suffix" },
+  { name: "ต้มยำ", type: "prefix" },
+  { name: "แกงเขียวหวาน", type: "prefix" },
+  { name: "ข้าวผัดต้มยำ", type: "prefix" },
+  { name: "ผัดมักกะโรนี", type: "prefix" },
+  { name: "แกงส้ม", type: "prefix" },
+  { name: "เส้นใหญ่ราดหน้า", type: "prefix" },
+  { name: "เส้นหมี่ราดหน้า", type: "prefix" },
+  { name: "หมี่กรอบราดหน้า", type: "prefix" },
+  { name: "เส้นใหญ่ผัดซีอิ๊ว", type: "prefix" },
+  { name: "เส้นหมี่ผัดซีอิ๊ว", type: "prefix" },
+  { name: "หมี่กรอบผัดซีอิ๊ว", type: "prefix" },
+  { name: "ผัดมาม่า", type: "prefix" },
+  { name: "สุกี้น้ำ", type: "prefix" },
+  { name: "สุกี้แห้ง", type: "prefix" },
+  { name: "ก๋วยเตี๋ยวคั่ว", type: "prefix" },
+  { name: "เส้นหมี่ผัดผักกระเฉด", type: "prefix" },
+  { name: "สปาเกตตีผัดขี้เมา", type: "prefix" },
+  { name: "มักกะโรนีผัดขี้เมา", type: "prefix" },
+  { name: "ส้มตำ", type: "individual" },
+  { name: "น้ำตกหมู", type: "individual" },
+];
+const meetList = ["หมู", "หมูสับ", "ไก่", "หมูกรอบ", "กุ้ง", "ปลาหมึก"];
 exports.foodRandom = (agent) => {
-    var date = new Date().getDay();
-    var time = new Date().getHours()
-    if(time + 7 >= 24){
-        time = time %24
-        date += 1;
-        if(date >= 7 ){
-            date = date %7;
-        }
-    }
-    let possible = []
-    for(let i of foodList){
-        if(time <= 14){
-            if(i.restriction.length == 0){
-                possible.push(i)
-            } else {
-                if(date == 3 || date == 4){
-                    if(i.restriction.indexOf('กลางวัน') != -1){
-                        possible.push(i)
-                    } else if(i.restriction.indexOf('นาน') != -1){
-                        possible.push(i)
-                    }
-                } else {
-                    if(i.restriction.indexOf('กลางวัน') != -1){
-                        possible.push(i)
-                    }
-                }
-            }
-        } else {
-            if(i.restriction.length == 0){
-                possible.push(i)
-            } else {
-                if(i.restriction.indexOf('เย็น') != -1){
-                    possible.push(i)
-                }
-            }
-        }
-    }
-    const ind = parseInt(Math.random() * 1000) % possible.length
-    agent.add(possible[ind].name)
-}
+  const ind = parseInt(Math.random() * 1000) % foodList.length;
+  if (foodList[ind].type === "individual") {
+    agent.add(foodList[ind].name);
+  } else if (foodList[ind].type === "prefix") {
+    agent.add(
+      foodList[ind].name +
+        " " +
+        meetList[parseInt(Math.random() * 1000) % meetList.length]
+    );
+  } else if (foodList[ind].type === "suffix") {
+    agent.add(
+      meetList[parseInt(Math.random() * 1000) % meetList.length] +
+        " " +
+        foodList[ind].name
+    );
+  }
+};
