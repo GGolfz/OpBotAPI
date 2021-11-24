@@ -13,12 +13,12 @@ const imgList = [
 ];
 exports.fatgirl = (agent) => {
   console.log(
-    "https://ggolfz.codes/opbot/image/" +
+    "https://ggolfz.me/opbot/image/" +
       imgList[parseInt(Math.random() * 100) % imgList.length]
   );
   agent.add(
     new Image(
-      "https://ggolfz.codes/opbot/image/" +
+      "https://ggolfz.me/opbot/image/" +
         imgList[parseInt(Math.random() * 100) % imgList.length]
     )
   );
@@ -27,13 +27,13 @@ exports.timeTable = (agent) => {
   let year = agent.parameters.year;
   if (year >= 1 && year <= 4) {
     agent.add(
-      new Image("https://ggolfz.codes/opbot/image/" + "y" + year + ".png")
+      new Image("https://ggolfz.me/opbot/image/" + "y" + year + ".png")
     );
 
     if (year == 2 || year == 3) {
       agent.add(
         new Image(
-          "https://ggolfz.codes/opbot/image/" + "y" + year + "ft" + ".png"
+          "https://ggolfz.me/opbot/image/" + "y" + year + "ft" + ".png"
         )
       );
     }
